@@ -286,6 +286,8 @@ formSearch.addEventListener("submit", (event) => {
 			renderCheap(data, formData.when);
 		});
 	} else {
+		inputCitiesFrom.style.border = '1px solid red'
+		inputCitiesTo.style.border = '1px solid red'
 		alert("Введите корректное название города!");
 	}
 });
