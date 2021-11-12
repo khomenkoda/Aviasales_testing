@@ -23,6 +23,8 @@ let city = [];
 let today = new Date;
 today = today.toISOString().slice(0,10);
 inputDateDepart.setAttribute('min', today);
+// const yearAfter =  `${parseInt(today.split('-')[0])+1}-${today.split('-')[1]}-${today.split('-')[2]}`
+// inputDateDepart.setAttribute('max', yearAfter);
 
 const getData = (url, callback) => {
 	// preloader.style.display = "block";
@@ -240,17 +242,17 @@ const renderCheap = (data, date) => {
 };
 
 inputCitiesFrom.addEventListener("input", () => {
-	inputCitiesFrom.style.border = 'none'
-	inputCitiesTo.style.border = 'none'
 	showCity(inputCitiesFrom, dropdownCitiesFrom);
 	dropdownCitiesFrom.style.display = "block";
+	inputCitiesFrom.style.border = 'none'
+	inputCitiesTo.style.border = 'none'
 });
 
 inputCitiesTo.addEventListener("input", () => {
-	inputCitiesFrom.style.border = 'none'
-	inputCitiesTo.style.border = 'none'
 	showCity(inputCitiesTo, dropdownCitiesTo);
 	dropdownCitiesTo.style.display = "block";
+	inputCitiesFrom.style.border = 'none'
+	inputCitiesTo.style.border = 'none'
 });
 
 dropdownCitiesFrom.addEventListener("click", (event) => {
@@ -290,8 +292,11 @@ formSearch.addEventListener("submit", (event) => {
 			renderCheap(data, formData.when);
 		});
 	} else {
-		inputCitiesFrom.style.border = '1px solid red'
-		inputCitiesTo.style.border = '1px solid red'
+		if (!formData.from) {
+			inputCitiesFrom.style.border = '1px solid red'
+		} else {
+			inputCitiesTo.style.border = '1px solid red'
+		}
 		alert("Введите корректное название города!");
 	}
 });
@@ -323,66 +328,66 @@ inputCitiesFrom.addEventListener("keyup", (event) => {
 		return;
 	}
 
-	switch (event.keyCode) {
-		/* case 8: 
-			if (index !== 0) {
-				index = 0; // Исправить Backspace
-			}
+	// switch (event.keyCode) {
+	// 	/* case 8: 
+	// 		if (index !== 0) {
+	// 			index = 0; // Исправить Backspace
+	// 		}
 
-			if (dropdownCitiesFrom.length === undefined) {
-				return;
-			} else {
-				dropdownCitiesFrom.children[index].classList.add("focus");
-				dropdownCitiesFrom.style.display = "block";
-			}
+	// 		if (dropdownCitiesFrom.length === undefined) {
+	// 			return;
+	// 		} else {
+	// 			dropdownCitiesFrom.children[index].classList.add("focus");
+	// 			dropdownCitiesFrom.style.display = "block";
+	// 		}
 
-			break; */
-		case 27: // Esc
-			dropdownCitiesFrom.style.display = "none";
-			break;
-		// case 38:
-		// 	--index;
+	// 		break; */
+	// 	case 27: // Esc
+	// 		dropdownCitiesFrom.style.display = "none";
+	// 		break;
+	// 	case 38:
+	// 		--index;
 
-		// 	let target = dropdownCitiesFrom.children[index];
+	// 		let target = dropdownCitiesFrom.children[index];
 
-		// 	if (index >= 0) {
-		// 		target.classList.add("focus");
-		// 		inputCitiesFrom.value = target.textContent;
-		// 	}
+	// 		if (index >= 0) {
+	// 			target.classList.add("focus");
+	// 			inputCitiesFrom.value = target.textContent;
+	// 		}
 
-		// 	if (index >= 10) {
-		// 		dropdownCitiesFrom.scrollTop = 28 * (index - 9);
-		// 	}
+	// 		if (index >= 10) {
+	// 			dropdownCitiesFrom.scrollTop = 28 * (index - 9);
+	// 		}
 
-		// 	if (index === -1) {
-		// 		index = dropdownCitiesFrom.children.length - 1;
-		// 		dropdownCitiesFrom.scrollTop = 28 * (index - 9);
-		// 		dropdownCitiesFrom.lastChild.classList.add("focus");
-		// 		inputCitiesFrom.value = dropdownCitiesFrom.children[index].textContent;
-		// 	}
-		// 	break;
-		// case 40:
-		// 	index++;
+	// 		if (index === -1) {
+	// 			index = dropdownCitiesFrom.children.length - 1;
+	// 			dropdownCitiesFrom.scrollTop = 28 * (index - 9);
+	// 			dropdownCitiesFrom.lastChild.classList.add("focus");
+	// 			inputCitiesFrom.value = dropdownCitiesFrom.children[index].textContent;
+	// 		}
+	// 		break;
+	// 	case 40:
+	// 		index++;
 
-		// 	let target2 = dropdownCitiesFrom.children[index];
+	// 		let target2 = dropdownCitiesFrom.children[index];
 
-		// 	if (index < dropdownCitiesFrom.children.length) {
-		// 		target2.classList.add("focus");
-		// 		inputCitiesFrom.value = target2.textContent;
-		// 	}
+	// 		if (index < dropdownCitiesFrom.children.length) {
+	// 			target2.classList.add("focus");
+	// 			inputCitiesFrom.value = target2.textContent;
+	// 		}
 
-		// 	if (index >= 9) {
-		// 		dropdownCitiesFrom.scrollTop = 28 * (index - 9);
-		// 	}
+	// 		if (index >= 9) {
+	// 			dropdownCitiesFrom.scrollTop = 28 * (index - 9);
+	// 		}
 
-		// 	if (index === dropdownCitiesFrom.children.length) {
-		// 		index = 0;
-		// 		dropdownCitiesFrom.scrollTop = 0;
-		// 		dropdownCitiesFrom.children[0].classList.add("focus");
-		// 		inputCitiesFrom.value = dropdownCitiesFrom.children[0].textContent;
-		// 	}
-		// 	break;
-	}
+	// 		if (index === dropdownCitiesFrom.children.length) {
+	// 			index = 0;
+	// 			dropdownCitiesFrom.scrollTop = 0;
+	// 			dropdownCitiesFrom.children[0].classList.add("focus");
+	// 			inputCitiesFrom.value = dropdownCitiesFrom.children[0].textContent;
+	// 		}
+	// 		break;
+	// }
 });
 
 inputCitiesTo.addEventListener("keyup", (event) => {
@@ -394,59 +399,59 @@ inputCitiesTo.addEventListener("keyup", (event) => {
 		return;
 	}
 
-	switch (event.keyCode) {
-		/* case 8: //backspace
-			if (index1 !== 0) {
-				index1 = 0;
-			}
-			dropdownCitiesTo.children[index1].classList.add("focus");
-			dropdownCitiesTo.style.display = "block";
-			break; */
-		case 27:
-			dropdownCitiesTo.style.display = "none";
-			break;
-		// case 38:
-		// 	--index1;
+	// switch (event.keyCode) {
+	// 	/* case 8: //backspace
+	// 		if (index1 !== 0) {
+	// 			index1 = 0;
+	// 		}
+	// 		dropdownCitiesTo.children[index1].classList.add("focus");
+	// 		dropdownCitiesTo.style.display = "block";
+	// 		break; */
+	// 	case 27:
+	// 		dropdownCitiesTo.style.display = "none";
+	// 		break;
+	// 	case 38:
+	// 		--index1;
 
-		// 	let target = dropdownCitiesTo.children[index1];
+	// 		let target = dropdownCitiesTo.children[index1];
 
-		// 	if (index1 >= 0) {
-		// 		target.classList.add("focus");
-		// 		inputCitiesTo.value = target.textContent;
-		// 	}
+	// 		if (index1 >= 0) {
+	// 			target.classList.add("focus");
+	// 			inputCitiesTo.value = target.textContent;
+	// 		}
 
-		// 	if (index1 >= 10) {
-		// 		// реализуем прокрутку (28px - высота одной лишки)
-		// 		dropdownCitiesTo.scrollTop = 28 * (index1 - 9);
-		// 	}
+	// 		if (index1 >= 10) {
+	// 			// реализуем прокрутку (28px - высота одной лишки)
+	// 			dropdownCitiesTo.scrollTop = 28 * (index1 - 9);
+	// 		}
 
-		// 	if (index1 === -1) {
-		// 		index1 = dropdownCitiesTo.children.length - 1;
-		// 		dropdownCitiesTo.scrollTop = 28 * (index1 - 9);
-		// 		dropdownCitiesTo.lastChild.classList.add("focus");
-		// 		inputCitiesTo.value = dropdownCitiesTo.children[index1].textContent;
-		// 	}
-		// 	break;
-		// case 40:
-		// 	index1++;
+	// 		if (index1 === -1) {
+	// 			index1 = dropdownCitiesTo.children.length - 1;
+	// 			dropdownCitiesTo.scrollTop = 28 * (index1 - 9);
+	// 			dropdownCitiesTo.lastChild.classList.add("focus");
+	// 			inputCitiesTo.value = dropdownCitiesTo.children[index1].textContent;
+	// 		}
+	// 		break;
+	// 	case 40:
+	// 		index1++;
 
-		// 	let target2 = dropdownCitiesTo.children[index1];
+	// 		let target2 = dropdownCitiesTo.children[index1];
 
-		// 	if (index1 < dropdownCitiesTo.children.length) {
-		// 		target2.classList.add("focus");
-		// 		inputCitiesTo.value = target2.textContent;
-		// 	}
+	// 		if (index1 < dropdownCitiesTo.children.length) {
+	// 			target2.classList.add("focus");
+	// 			inputCitiesTo.value = target2.textContent;
+	// 		}
 
-		// 	if (index1 >= 9) {
-		// 		dropdownCitiesTo.scrollTop = 28 * (index1 - 9);
-		// 	}
+	// 		if (index1 >= 9) {
+	// 			dropdownCitiesTo.scrollTop = 28 * (index1 - 9);
+	// 		}
 
-		// 	if (index1 === dropdownCitiesTo.children.length) {
-		// 		index1 = 0;
-		// 		dropdownCitiesTo.scrollTop = 0;
-		// 		dropdownCitiesTo.children[0].classList.add("focus");
-		// 		inputCitiesTo.value = dropdownCitiesTo.children[0].textContent;
-		// 	}
-		// 	break;
-	}
+	// 		if (index1 === dropdownCitiesTo.children.length) {
+	// 			index1 = 0;
+	// 			dropdownCitiesTo.scrollTop = 0;
+	// 			dropdownCitiesTo.children[0].classList.add("focus");
+	// 			inputCitiesTo.value = dropdownCitiesTo.children[0].textContent;
+	// 		}
+	// 		break;
+	// }
 });
