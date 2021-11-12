@@ -240,11 +240,15 @@ const renderCheap = (data, date) => {
 };
 
 inputCitiesFrom.addEventListener("input", () => {
+	inputCitiesFrom.style.border = 'none'
+	inputCitiesTo.style.border = 'none'
 	showCity(inputCitiesFrom, dropdownCitiesFrom);
 	dropdownCitiesFrom.style.display = "block";
 });
 
 inputCitiesTo.addEventListener("input", () => {
+	inputCitiesFrom.style.border = 'none'
+	inputCitiesTo.style.border = 'none'
 	showCity(inputCitiesTo, dropdownCitiesTo);
 	dropdownCitiesTo.style.display = "block";
 });
