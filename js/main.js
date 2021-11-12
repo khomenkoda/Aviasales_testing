@@ -23,8 +23,8 @@ let city = [];
 let today = new Date;
 today = today.toISOString().slice(0,10);
 inputDateDepart.setAttribute('min', today);
-// const yearAfter =  `${parseInt(today.split('-')[0])+1}-${today.split('-')[1]}-${today.split('-')[2]}`
-// inputDateDepart.setAttribute('max', yearAfter);
+const yearAfter =  `${parseInt(today.split('-')[0])+1}-${today.split('-')[1]}-${today.split('-')[2]}`
+inputDateDepart.setAttribute('max', yearAfter);
 
 const getData = (url, callback) => {
 	// preloader.style.display = "block";
